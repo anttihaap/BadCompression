@@ -5,7 +5,7 @@ package badcompression.io;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.sun.xml.internal.ws.util.ByteArrayBuffer;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 public class WriteBitTest {
 
     private WriteBit write;
-    private ByteArrayBuffer outStream;
+    private ByteArrayOutputStream outStream;
     private String[] testStringOutput;
     private byte[] testByteOutput;
 
@@ -38,7 +38,7 @@ public class WriteBitTest {
 
     @Before
     public void setUp() {
-        outStream = new ByteArrayBuffer();
+        outStream = new ByteArrayOutputStream();
         write = new WriteBit(outStream);
 
         testStringOutput = new String[]{"00000000", "00000001", "00000010",
