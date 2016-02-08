@@ -124,5 +124,4 @@ public class WriteBitTest {
         write.close();
         assertEquals(0, outStream.toByteArray().length);
     }
-
 }
