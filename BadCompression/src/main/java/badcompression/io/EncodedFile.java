@@ -1,19 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package badcompression.io;
 
 /**
- * Interface for reading characters from encoded file.
+ * Interface for reading single character at a time from an encoded file.
  * @author antti
  */
 public interface EncodedFile {
     
+    /**
+     * Returns next character of encoded file.
+     * @return
+     */
     int getNextCharacter();
     byte[] getBytes();
-    long getByesInFile();
+    long getAmountOfBytes();
     void resetReader();
        
 }

@@ -5,7 +5,6 @@
  */
 package badcompression.huffman;
 
-import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -77,7 +76,5 @@ public class HuffmanCodingTest {
         if (node.rightNode != null) counter += countNodes(node.rightNode);
         return counter+1;
     }
-
-
-    
+  
 }

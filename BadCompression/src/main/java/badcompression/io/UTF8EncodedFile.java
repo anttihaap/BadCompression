@@ -35,7 +35,7 @@ public class UTF8EncodedFile implements EncodedFile {
     }
 
     @Override
-    public long getByesInFile() {
+    public long getAmountOfBytes() {
         return file.length;
     }
 

@@ -57,7 +57,7 @@ public class ByteEncodedFileTest {
     
     @Test
     public void length() {
-        assertEquals(testBytes.length, encoded.getByesInFile());
+        assertEquals(testBytes.length, encoded.getAmountOfBytes());
     }
     
     @Test

@@ -6,7 +6,7 @@
 package badcompression.io;
 
 /**
- * 
+ * Reads byte by byte any file.
  * @author antti
  */
 public class ByteEncodedFile implements EncodedFile {
@@ -30,7 +30,7 @@ public class ByteEncodedFile implements EncodedFile {
     }
 
     @Override
-    public long getByesInFile() {
+    public long getAmountOfBytes() {
        return file.length;
     }
 

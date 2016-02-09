@@ -42,7 +42,6 @@ public class HuffmanCompression {
             }
             if (curr.isLeafNode()) {
                 if (curr.c == -1) {
-                    System.out.println("the END");
                     break;
                 }
                 outbuff.write(curr.c);

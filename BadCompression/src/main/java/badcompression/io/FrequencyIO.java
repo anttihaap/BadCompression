@@ -12,14 +12,23 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * 
+ * Writes and read frequencies from/to file.
  * @author antti
  */
-public class HuffmanCodingIO {
+public class FrequencyIO {
 
-    //TODO comment
+    /**
+     * Uses 255 byte for separation.
+     */
     public final static int byteSeparator = 255;
 
+    /**
+     * Reads frequencies from the begining of a file.
+     * @param in
+     * @param characters
+     * @return
+     * @throws IOException
+     */
     public static long[] readFrequencies(InputStream in, int characters) throws IOException {
         String s1 = returnStringUntillSeparator(in);
         String s2 = returnStringUntillSeparator(in);
@@ -42,6 +51,11 @@ public class HuffmanCodingIO {
         return baos.toString();
     }
 
+    /**
+     * Writes frequencies to file.
+     * @param outStream
+     * @param huffCoding
+     */
     public static void writeFreq(OutputStream outStream, HuffmanCoding huffCoding) {
         long[] char_freq = huffCoding.getCharFreq();
         try {
