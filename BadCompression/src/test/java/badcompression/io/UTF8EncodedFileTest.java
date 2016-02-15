@@ -5,6 +5,8 @@
  */
 package badcompression.io;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -40,6 +42,19 @@ public class UTF8EncodedFileTest {
     public void tearDown() {
     }
    
+    @Test
+    public void test() throws UnsupportedEncodingException {
+        String expected = new String(generateTestInput(10000));
+        UTF8EncodedFile encoded = new UTF8EncodedFile(expected.getBytes("UTF-8"));
+        for (int i = 0; i < expected.length(); i++) {
+            char c = (char) encoded.getNextCharacter();
+            if ((int) c != (int) expected.charAt(i)) {
+            System.out.println(expected.charAt(i) + " - " + c + " - " + (int) c + " - " + (int) expected.charAt(i));
+            }
+            assertArrayEquals((expected.charAt(i) + "").getBytes("UTF-8"), (c + "").getBytes("UTF-8"));
+        }
+        assertEquals(-1, encoded.getNextCharacter());
+    }
 
     private char[] generateTestInput(int length) {
         char[] testInput = new char[length];

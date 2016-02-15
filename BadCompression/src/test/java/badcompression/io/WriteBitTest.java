@@ -40,7 +40,6 @@ public class WriteBitTest {
     public void setUp() {
         outStream = new ByteArrayOutputStream();
         write = new WriteBit(outStream);
-
         testStringOutput = new String[]{"00000000", "00000001", "00000010",
             "00000011","00101000"};
         testByteOutput = new byte[]{0x0, 0x1, 0x2, 0x3,0x28};

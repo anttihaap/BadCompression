@@ -12,8 +12,11 @@ import java.nio.file.Files;
 import badcompression.io.EncodedFile;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Compresses and decompresses any file using Huffman coding.
@@ -38,7 +41,7 @@ public class HuffmanCompressionByte extends HuffmanCompression implements Compre
         } catch (IOException ex) {
             new CompressionResults("Input file.");
         }
-        HuffmanCoding huff_coding = new HuffmanCoding(getFreq(file.getBytes()), true);
+        HuffmanCoding huff_coding = new HuffmanCoding(file.getFreq(), true);
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(new File(outputFile));
@@ -46,20 +49,25 @@ public class HuffmanCompressionByte extends HuffmanCompression implements Compre
             return new CompressionResults("Output file.");
         }
 
-        FrequencyIO.writeFreq(out, huff_coding);
-        byte[] output;
         try {
-            output = encode(file, huff_coding);
+            FrequencyIO.writeFreq(out, huff_coding);
         } catch (IOException ex) {
-            return new CompressionResults("Encoding failure.");
+            return new CompressionResults("Frequency writing failure.");
         }
         try {
-            out.write(output);
-            out.flush();
-            out.close();
-        } catch (IOException e) {
-            return new CompressionResults("Writing failure.");
+            //        byte[] output;
+            encode(huff_coding, file, out);
+        } catch (IOException ex) {
+            Logger.getLogger(HuffmanCompressionByte.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+//        try {
+//            out.write(output);
+//            out.flush();
+//            out.close();
+//        } catch (IOException e) {
+//            return new CompressionResults("Writing failure.");
+//        }
         //TODO: output for results.
         return new CompressionResults(0, 0);
     }
@@ -89,32 +97,28 @@ public class HuffmanCompressionByte extends HuffmanCompression implements Compre
         HuffmanCoding huff_coding = new HuffmanCoding(freq, false);
         HuffmanTreeNode root = huff_coding.getHuffTree();
         byte[] decoded = null;
+        OutputStream out = null;
         try {
-            decoded = decode(root, in);
+            out = new FileOutputStream(new File(target));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(HuffmanCompressionByte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            decode(root, in, out);
         } catch (IOException ex) {
             new CompressionResults("Decode failure.");
         }
         try {
-            FileOutputStream fileWriter = new FileOutputStream(new File(target));
-            fileWriter.write(decoded);
-        } catch (IOException e) {
-            new CompressionResults("Write failure.");
+            out.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(HuffmanCompressionByte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            out.close();
+        } catch (IOException ex) {
+            Logger.getLogger(HuffmanCompressionByte.class.getName()).log(Level.SEVERE, null, ex);
         }
         //TODO: output for results.
         return new CompressionResults(0, 0);
-    }
-
-    /**
-     * Returns frequency of single bytes.
-     *
-     * @param bytes Array of bytes
-     * @return Frequency of bytes.
-     */
-    public static long[] getFreq(byte[] bytes) {
-        long[] freq = new long[256];
-        for (byte b : bytes) {
-            freq[b & 0xFF]++;
-        }
-        return freq;
     }
 }

@@ -52,9 +52,9 @@ public class HuffmanCodingTest {
     */
     @Test
     public void codings1Test() {
-        String[] codes = {"11001","1101","111","10","0"};
+        String[] expected = {"11001","1101","111","10","0"};
         for (int i = 0;i< freq1.length;i++) {
-            assertEquals(codes[i], coding1.getCharCode(i));
+            assertEquals(expected[i], coding1.getCharCode(i));
         }
         assertEquals("11000", coding1.getEofCode());
     }

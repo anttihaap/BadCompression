@@ -1,5 +1,9 @@
 package badcompression.compression;
 
+/**
+ * Contains result information about compression.
+ * @author antti
+ */
 public class CompressionResults {
     
     private boolean failure;
@@ -23,8 +27,8 @@ public class CompressionResults {
      */
     public CompressionResults(long original, long compressed) {
         this.failure = false;
-        this.originalBytes = originalBytes;
-        this.compressedBytes = compressedBytes;
+        this.originalBytes = original;
+        this.compressedBytes = compressed;
     }  
 
     /**

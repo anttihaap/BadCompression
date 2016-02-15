@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package badcompression.huffman;
 
 import badcompression.io.ByteEncodedFile;
 import badcompression.io.EncodedFile;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Random;
 import org.junit.After;
@@ -17,10 +13,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author antti
- */
 public class HuffmanCompressionTest {
 
     private Random r;
@@ -46,13 +38,27 @@ public class HuffmanCompressionTest {
     }
     
     @Test
-    public void encodeDecodeComparison() throws IOException {
-        byte[] original = getRandomByteArray(1000);
-        long[] freq = HuffmanCompressionByte.getFreq(original);
-        HuffmanCoding hffCodining = new HuffmanCoding(freq, true);
+    public void encodeDecode100RandomData() throws IOException {
+        for (int i = 0; i < 1000; i++) {
+            encodeDecodeRandomData(1000);
+        }
+    }
+    
+    public void encodeDecodeRandomData(int dataLengthInBytes) throws IOException {
+        byte[] original = getRandomByteArray(dataLengthInBytes);
         EncodedFile testFile = new ByteEncodedFile(original);
-        byte[] encoded = HuffmanCompression.encode(testFile, hffCodining);
-        byte[] decoded = HuffmanCompressionByte.decode(hffCodining.getHuffTree(), new ByteArrayInputStream(encoded));
+        long[] freq = testFile.getFreq();
+        HuffmanCoding hffCodining = new HuffmanCoding(freq, true);
+        
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        
+        HuffmanCompression.encode(hffCodining, testFile, out);
+        byte[] encoded = out.toByteArray();
+        out = new ByteArrayOutputStream();
+        HuffmanCompressionByte.decode(hffCodining.getHuffTree(), new ByteArrayInputStream(encoded), out);
+        out.flush();
+        out.close();
+        byte[] decoded = out.toByteArray();
         compareByteArrayIsIdentical(original, decoded);
     }
 
@@ -68,5 +74,4 @@ public class HuffmanCompressionTest {
         r.nextBytes(arr);
         return arr;
     }
-
 }

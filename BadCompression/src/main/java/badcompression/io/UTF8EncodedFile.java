@@ -16,11 +16,25 @@ public class UTF8EncodedFile implements EncodedFile {
     private byte[] file;
     private String UTF8encoded;
     private int counter;
+    private long[] freq;
     
+    /**
+     * Processes UTF-8 encoded file for reading.
+     * @param file File in bytes.
+     * @throws UnsupportedEncodingException Thrown when file is not UTF-8 encoded.
+     */
     public UTF8EncodedFile(byte[] file) throws UnsupportedEncodingException {
         this.file = file;
-        UTF8encoded = new String(file, "UTF-8");
+        UTF8encoded = new String(this.file, "UTF-8");
         counter = 0;
+        freq = new long[Character.MAX_VALUE];
+        calculateFreq();
+    }
+    
+    private void calculateFreq() {
+        for (int i = 0; i < UTF8encoded.length(); i++) {
+            freq[UTF8encoded.charAt(i)]++;
+        }
     }
 
     @Override
@@ -29,19 +43,39 @@ public class UTF8EncodedFile implements EncodedFile {
         return UTF8encoded.charAt(counter++);
     }
 
+    /**
+     * Returns original bytes of file.
+     * @return
+     */
     @Override
     public byte[] getBytes() {
         return file;
     }
 
+    /**
+     * Returns amount of bytes in file.
+     * @return
+     */
     @Override
     public long getAmountOfBytes() {
         return file.length;
     }
 
+    /**
+     * Resets reader.
+     */
     @Override
     public void resetReader() {
         counter = 0;
+    }
+
+    /**
+     * Returns frequencies of characters in file.
+     * @return
+     */
+    @Override
+    public long[] getFreq() {
+        return freq;
     }
     
 }

@@ -12,12 +12,30 @@ package badcompression.io;
 public class ByteEncodedFile implements EncodedFile {
 
     private byte[] file;
+    private long[] freq;
     private int counter;
     
+    /**
+     * Creates ByteEncoded file for reading.
+     * @param file File.
+     */
     public ByteEncodedFile(byte[] file) {
         this.file = file;
+        freq = new long[256];
         counter = 0;
+        calculateFreq();
     }
+    
+    private void calculateFreq() {
+        for (byte b : file) {
+            freq[b & 0xFF]++;
+        }
+    }
+    
+    public long[] getFreq() {
+        return freq;
+    }
+    
     @Override
     public int getNextCharacter() {
         if (counter >= file.length) return -1;

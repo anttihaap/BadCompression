@@ -7,28 +7,27 @@ package badcompression.huffman;
 
 import badcompression.io.ReadBit;
 import badcompression.io.WriteBit;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import badcompression.io.EncodedFile;
+import java.io.OutputStream;
 
 /**
  * Compression using Huffman coding.
  * @author antti
  */
 public class HuffmanCompression {
-
+    
     /**
      * Decodes compressed files, that where compressed with Huffman coding.
-     * @param huffTree
-     * @param in
-     * @return
+     * @param huffTree HuffCoding for characters.
+     * @param in Input for decoder
+     * @param out Output for decoded file.
      * @throws IOException
      */
-    public static byte[] decode(HuffmanTreeNode huffTree, InputStream in) throws IOException {
+    public static void decode(HuffmanTreeNode huffTree, InputStream in, OutputStream out) throws IOException {
         HuffmanTreeNode curr = huffTree;
         ReadBit r = new ReadBit(in);
-        ByteArrayOutputStream outbuff = new ByteArrayOutputStream();
         while (true) {
             int bitValue = r.readBit();
             if (bitValue == -1) {
@@ -44,26 +43,20 @@ public class HuffmanCompression {
                 if (curr.c == -1) {
                     break;
                 }
-                outbuff.write(curr.c);
+                out.write(curr.c);     
                 curr = huffTree;
             }
         }
-
-        outbuff.flush();
-        outbuff.close();
-        return outbuff.toByteArray();
     }
     
     /**
      * Encodes files with huffman coding.
-     * @param input
-     * @param huffCoding
-     * @return
+     * @param input File input.
+     * @param huffCoding HuffmanCoding used for encoding.
      * @throws IOException
      */
-    public static byte[] encode(EncodedFile input, HuffmanCoding huffCoding) throws IOException {
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        WriteBit write = new WriteBit(output);
+    public static void encode(HuffmanCoding huffCoding, EncodedFile input, OutputStream out) throws IOException {
+        WriteBit write = new WriteBit(out);
         int in; 
         while((in = input.getNextCharacter()) != -1) {
             String binaryStr = huffCoding.getCharCode(in);
@@ -72,6 +65,5 @@ public class HuffmanCompression {
         write.write(huffCoding.getEofCode());
         write.flush();
         write.close();
-        return output.toByteArray();
     }
 }

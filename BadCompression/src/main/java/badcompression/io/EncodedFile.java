@@ -15,5 +15,6 @@ public interface EncodedFile {
     byte[] getBytes();
     long getAmountOfBytes();
     void resetReader();
+    long[] getFreq();
        
 }

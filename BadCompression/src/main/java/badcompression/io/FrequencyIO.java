@@ -13,6 +13,7 @@ import java.io.OutputStream;
 
 /**
  * Writes and read frequencies from/to file.
+ *
  * @author antti
  */
 public class FrequencyIO {
@@ -24,6 +25,7 @@ public class FrequencyIO {
 
     /**
      * Reads frequencies from the begining of a file.
+     *
      * @param in
      * @param characters
      * @return
@@ -48,44 +50,39 @@ public class FrequencyIO {
         while ((read = in.read()) != 255) {
             baos.write(read);
         }
-        return baos.toString();
+        return new String(baos.toByteArray(), "UTF-8");
     }
 
     /**
      * Writes frequencies to file.
+     *
      * @param outStream
      * @param huffCoding
      */
-    public static void writeFreq(OutputStream outStream, HuffmanCoding huffCoding) {
+    public static void writeFreq(OutputStream outStream, HuffmanCoding huffCoding) throws IOException {
         long[] char_freq = huffCoding.getCharFreq();
-        try {
-            for (int i = 0; i < huffCoding.getCharFreq().length; i++) {
-                if (huffCoding.getCharCode(i) != null) {
-                    String out = "" + (char) i;
-                    outStream.write(out.getBytes("UTF-8"));
-                }
-            }
-            outStream.write(255);
-            boolean has = false;
-            for (int i = 0; i < char_freq.length; i++) {
-                if (char_freq[i] != 0) {
-                    String str = "";
-                    if (!has) {
-                        str += char_freq[i];
-                        has = true;
-                    } else {
-                        str = " " + char_freq[i];
-                    }
-                    outStream.write(str.getBytes("UTF-8"));
-                }
-            }
-            outStream.write(255);
-            outStream.flush();
-        } catch (Exception e) {
-            System.out.println(e.getCause());
-            System.out.println(e.getMessage());
-            System.out.println("exp");
-        }
-    }
 
+        for (int i = 0; i < char_freq.length; i++) {
+            if (huffCoding.getCharCode(i) != null) {
+                String out = "" + (char) i;
+                outStream.write(out.getBytes("UTF-8"));
+            }
+        }
+        outStream.write(255);
+        boolean has = false;
+        for (int i = 0; i < char_freq.length; i++) {
+            if (char_freq[i] != 0) {
+                String str = "";
+                if (!has) {
+                    str += String.valueOf(char_freq[i]);
+                    has = true;
+                } else {
+                    str = " " + String.valueOf(char_freq[i]);
+                }
+                outStream.write(str.getBytes("UTF-8"));
+            }
+        }
+        outStream.write(255);
+        outStream.flush();
+    }
 }
