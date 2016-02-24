@@ -46,7 +46,6 @@ public class HuffmanCompressionUTF8Test {
         CompressorTests.testUTF8Files(new HuffmanCompressionUTF8());
     }
     
-// TODO: fix code for test.
 //    @Test
 //    public void randomOutput100Times() throws Exception {
 //        for (int i = 0; i < 1000; i++) {
@@ -55,7 +54,7 @@ public class HuffmanCompressionUTF8Test {
 //    }
     
     public void randomOutput(int length) throws IOException, Exception {
-        File rmp = File.createTempFile("temp3", ".txt");
+        File rmp = File.createTempFile("temp3aasssssssddddddd", ".txt");
         System.out.println("created random to: " + rmp.toPath());
         FileOutputStream stream = new FileOutputStream(rmp);
         stream.write(randomString(length).getBytes("UTF-8"));
@@ -64,13 +63,16 @@ public class HuffmanCompressionUTF8Test {
         CompressorTests.compressUncompressTest(new HuffmanCompressionUTF8(), rmp.getPath());
     }
     
-    private String randomString(int length) {
-        Random r = new Random();
-        
-        char[] charArr = new char[length];
-        for (int i = 0; i < charArr.length; i++) {
-            charArr[i] = (char) r.nextInt(Character.MAX_VALUE+1);
-        }
-        return new String(charArr);
-    }
+
+    public static String randomString(int length) {
+      Random r = new Random();
+      StringBuffer sb = new StringBuffer(length);
+      while (sb.length() < length) {
+            char c = (char) r.nextInt(Character.MAX_VALUE);
+            if (Character.isDefined(c)) {
+                  sb.append(c);
+            }
+      }
+      return sb.toString();
+}
 }

@@ -6,7 +6,6 @@
 package badcompression.io;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;

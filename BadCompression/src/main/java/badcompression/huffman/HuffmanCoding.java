@@ -1,6 +1,6 @@
 package badcompression.huffman;
 
-import java.util.PriorityQueue;
+import badcompression.datastructures.MinPriorityQueue;
 
 /**
  * Creates Huffman coding based on character frequencies.
@@ -31,18 +31,18 @@ public class HuffmanCoding {
     }
 
     private HuffmanTreeNode createHuffmanTree(long[] charFreq) {
-        PriorityQueue<HuffmanTreeNode> pq = populateHeap(charFreq);
+        MinPriorityQueue<HuffmanTreeNode> pq = populateHeap(charFreq);
         while (pq.size() > 1) {
-            HuffmanTreeNode smallest = pq.poll();
-            HuffmanTreeNode largest = pq.poll();
+            HuffmanTreeNode smallest = pq.remove();
+            HuffmanTreeNode largest = pq.remove();
             HuffmanTreeNode newNode = new HuffmanTreeNode(-1, largest.weight + smallest.weight, smallest, largest);
             pq.add(newNode);
         }
-        return pq.poll();
+        return pq.remove();
     }
 
-    private PriorityQueue<HuffmanTreeNode> populateHeap(long[] charFreq) {
-        PriorityQueue<HuffmanTreeNode> pq = new PriorityQueue<>();
+    private MinPriorityQueue<HuffmanTreeNode> populateHeap(long[] charFreq) {
+        MinPriorityQueue<HuffmanTreeNode> pq = new MinPriorityQueue<>();
         for (int i = 0; i < charFreq.length; i++) {
             if (charFreq[i] > 0) {
                 pq.add(new HuffmanTreeNode(i, charFreq[i], null, null));

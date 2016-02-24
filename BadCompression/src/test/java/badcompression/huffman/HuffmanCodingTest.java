@@ -52,6 +52,10 @@ public class HuffmanCodingTest {
     */
     @Test
     public void codings1Test() {
+        for (int i = 0; i < freq1.length; i++) {
+            System.out.println(coding1.getCharCode(i));
+        }
+        
         String[] expected = {"11001","1101","111","10","0"};
         for (int i = 0;i< freq1.length;i++) {
             assertEquals(expected[i], coding1.getCharCode(i));

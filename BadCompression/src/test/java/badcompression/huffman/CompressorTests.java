@@ -46,9 +46,10 @@ public class CompressorTests {
     }
     
     public static void testUTF8Files(Compressor comp) throws Exception {
-        compressUncompressFromResourceTest(comp,"utf8testfiles/Wikipedia_Arbitration_Committee_Elections_December_2013.txt");
-        compressUncompressFromResourceTest(comp,"utf8testfiles/Template_talk:Euro_convergence_criteria.txt");
-        compressUncompressFromResourceTest(comp,"utf8testfiles/japanese_wiki_japanese_language.txt");
+        compressUncompressFromResourceTest(comp,"utf8testfiles/wikipedia_chinese_title:中华人民共和国.txt");
+        compressUncompressFromResourceTest(comp,"utf8testfiles/wikipedia_english_title:Template_talk:Euro_convergence_criteria.txt");
+        compressUncompressFromResourceTest(comp,"utf8testfiles/wikipedia_english_title:Wikipedia_talk:Arbitration_Committee_Elections_December_2013.txt");
+        compressUncompressFromResourceTest(comp,"utf8testfiles/wikipedia_japanese_title:_日本語.txt");
     }
 
     public static void filesAreIdentical(URI file1, URI file2) throws Exception {

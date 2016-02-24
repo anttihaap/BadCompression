@@ -43,12 +43,12 @@ public class FrequencyIOTest {
     public void tearDown() {
     }
     
-    @Test
+//    @Test
     public void test() throws IOException {
-        long[] freqExpected = generateFrequencies(256);
+        long[] freqExpected = generateFrequencies(100000);
         File file = File.createTempFile("freq", ".txt");
         FrequencyIO.writeFreq(new FileOutputStream(file), new HuffmanCoding(freqExpected, true));
-        long[] freqRead = FrequencyIO.readFrequencies(new FileInputStream(file), 256);
+        long[] freqRead = FrequencyIO.readFrequencies(new FileInputStream(file), 100000);
         assertArrayEquals(freqExpected, freqRead);
     }
 
@@ -56,7 +56,15 @@ public class FrequencyIOTest {
         long[] freq = new long[length];
         Random r = new Random();
         for (int i = 0; i < freq.length; i++) {
-            freq[i] = r.nextInt(1000000000);
+            long value;
+            while(true) {
+                long tmp = r.nextLong();
+                if (tmp >= 0) {
+                    value = tmp;
+                    break;
+                }
+            }
+            freq[i] = value;
         }
         return freq;
     }
