@@ -31,10 +31,6 @@ Tiedostot löytyvät sijainnista: <linkki>
 
 ##### Satunnaisgeneroitu UTF-8 (TODO):
 
-### Mahdollisia testejä toteutettavaksi:
-
-* tiedostojen kokojen verailu ja ajankäyttö
-
 ## MinPriorityQueue vs. javan PriorityQueue
 
 MinPriorityQueue on toteutettu MinBinaryHeap:lla. Oheisessa taulukosta nähdään miten itsetoteutettu tietorakenne pärjää javan kirjastossa olevaa vastaan. Testit ovat ajettu 10 kertaa per n ja testiajojen keskiarvo näkyy taulukossa.
@@ -52,4 +48,5 @@ Koodi: badcompression.main.Heaptesting.java
 
 ## Toteutettavaa:
 
-Parempia ohjelmia testaukseen. Kuvia, taulukkoja.
+* Parempia ohjelmia testaukseen. Kuvia, taulukkoja.
+* ajankäyttö pakkauksessa
