@@ -22,7 +22,7 @@ Tiedostot löytyvät sijainnista: <linkki>
 ##### Satunnaisgeneroitu data:
 
 |tiedosto|alkperäinen koko|tavu pakkaus|% alkuperäisestä|
-|---|---|---|
+|---|---|---|---|
 |random1.dat|5242880|5247327|~100%|
 |random2.dat|5242880|5247301|~100%|
 |random3.dat|5242880|5247317|~100%|
