@@ -22,7 +22,7 @@ Tiedostot löytyvät sijainnista: <linkki>
 ##### Satunnaisgeneroitu data:
 
 |tiedosto|alkperäinen koko|tavu pakkaus|% alkuperäisestä|
-|---|---|---|---|
+|---|---|---|
 |random1.dat|5242880|5247327|~100%|
 |random2.dat|5242880|5247301|~100%|
 |random3.dat|5242880|5247317|~100%|
@@ -30,6 +30,36 @@ Tiedostot löytyvät sijainnista: <linkki>
 Tiedostot löytyvät sijainnista: <linkki>
 
 ##### Satunnaisgeneroitu UTF-8 (TODO):
+
+### Mahdollisia testejä toteutettavaksi:
+
+* tiedostojen kokojen verailu ja ajankäyttö
+
+## Pakkauksen ja purun ajankäyttö:
+
+Vertailua purun ja pakkauksen ajankäytöstä.
+
+*** TODO: raakadata kaikelle + kuvaajat ***
+
+### HuffmanCompresionByte
+
+#### Pakkaus:
+* 1K bytes in random file - time: 13.0
+* 201K bytes in random file - time: 187.0
+* 501K bytes in random file - time: 460.0
+* 2001K bytes in random file - time: 1842.0
+* 3501K bytes in random file - time: 3202.0
+* 3601K bytes in random file - time: 3319.0
+* 3701K bytes in random file - time: 3382.0
+* 3801K bytes in random file - time: 3503.0
+
+##### Purku:
+
+### HuffmanCompressionUTF8
+
+##### Pakkaus:
+
+##### Purku:
 
 ## MinPriorityQueue vs. javan PriorityQueue
 
@@ -48,5 +78,4 @@ Koodi: badcompression.main.Heaptesting.java
 
 ## Toteutettavaa:
 
-* Parempia ohjelmia testaukseen. Kuvia, taulukkoja.
-* ajankäyttö pakkauksessa
+Raakadataa suorituksista ja kuvaajia.

@@ -56,5 +56,4 @@ public class ByteEncodedFile implements EncodedFile {
     public void resetReader() {
         counter = 0;
     }
-    
 }

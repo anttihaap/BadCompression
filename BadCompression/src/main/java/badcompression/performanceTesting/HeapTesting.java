@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package badcompression.testing;
+package badcompression.performanceTesting;
 
 import badcompression.datastructures.MinPriorityQueue;
 import java.util.PriorityQueue;

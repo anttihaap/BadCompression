@@ -43,7 +43,7 @@ public class HuffmanCompressionUTF8Test {
     
     @Test
     public void utf8FileAreIdentical() throws Exception {
-        CompressorTests.testUTF8Files(new HuffmanCompressionUTF8());
+        CompressorTestsUtil.testUTF8Files(new HuffmanCompressionUTF8());
     }
     
 //    @Test
@@ -53,15 +53,15 @@ public class HuffmanCompressionUTF8Test {
 //        }
 //    }
     
-    public void randomOutput(int length) throws IOException, Exception {
-        File rmp = File.createTempFile("temp3aasssssssddddddd", ".txt");
-        System.out.println("created random to: " + rmp.toPath());
-        FileOutputStream stream = new FileOutputStream(rmp);
-        stream.write(randomString(length).getBytes("UTF-8"));
-        stream.flush();
-        stream.close();
-        CompressorTests.compressUncompressTest(new HuffmanCompressionUTF8(), rmp.getPath());
-    }
+//    public void randomOutput(int length) throws IOException, Exception {
+//        File rmp = File.createTempFile("temp3aasssssssddddddd", ".txt");
+//        System.out.println("created random to: " + rmp.toPath());
+//        FileOutputStream stream = new FileOutputStream(rmp);
+//        stream.write(randomString(length).getBytes("UTF-8"));
+//        stream.flush();
+//        stream.close();
+//        CompressorTestsUtil.compressUncompressTest(new HuffmanCompressionUTF8(), rmp.getPath());
+//    }
     
 
     public static String randomString(int length) {

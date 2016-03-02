@@ -9,7 +9,6 @@ package badcompression.datastructures;
 import badcompression.datastructures.MinBinaryHeap;
 import badcompression.huffman.HuffmanTreeNode;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -74,7 +73,7 @@ public class MinBinaryHeapTest {
     
     @Test
     public void testHeapWithHuffmanTreeNodes() {
-        HuffmanTreeNode[] nodes = getRandomHuffmanTreeNodes(10000);
+        HuffmanTreeNode[] nodes = getRandomHuffmanTreeNodeArray(10000);
         MinBinaryHeap<HuffmanTreeNode> heap = new MinBinaryHeap<>();
         for (HuffmanTreeNode node : nodes) {
             heap.insert(node);
@@ -112,7 +111,7 @@ public class MinBinaryHeapTest {
         return array;
     }
     
-    private HuffmanTreeNode[] getRandomHuffmanTreeNodes(int length) {
+    private HuffmanTreeNode[] getRandomHuffmanTreeNodeArray(int length) {
         Random r = new Random();
         HuffmanTreeNode[] nodes = new HuffmanTreeNode[length];
         for (int i = 0; i < length; i++) {

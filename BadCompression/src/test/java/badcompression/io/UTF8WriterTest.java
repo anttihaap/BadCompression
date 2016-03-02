@@ -5,7 +5,7 @@
  */
 package badcompression.io;
 
-import badcompression.huffman.CompressorTests;
+import badcompression.huffman.CompressorTestsUtil;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -50,14 +50,14 @@ public class UTF8WriterTest {
     public void testOutput1() throws Exception {
         File file = writeStrintToFile(testOutput1);
         URL expected = Thread.currentThread().getContextClassLoader().getResource("utf8writertest/testOutput1Expected.txt");
-        CompressorTests.filesAreIdentical(file.toURI(), expected.toURI());
+        CompressorTestsUtil.filesAreIdentical(file.toURI(), expected.toURI());
     }
     
     @Test
     public void testOutput2() throws Exception {
         File file = writeStrintToFile(testOutput2);
         URL expected = Thread.currentThread().getContextClassLoader().getResource("utf8writertest/testOutput2Expected.txt");
-        CompressorTests.filesAreIdentical(file.toURI(), expected.toURI());
+        CompressorTestsUtil.filesAreIdentical(file.toURI(), expected.toURI());
     }
     
     private File writeStrintToFile(String s) throws IOException {

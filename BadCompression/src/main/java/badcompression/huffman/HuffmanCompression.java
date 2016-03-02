@@ -6,7 +6,7 @@
 package badcompression.huffman;
 
 import badcompression.io.ReadBit;
-import badcompression.io.WriteBit;
+import badcompression.io.BitWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import badcompression.io.EncodedFile;
@@ -56,7 +56,7 @@ public class HuffmanCompression {
      * @throws IOException
      */
     public static void encode(HuffmanCoding huffCoding, EncodedFile input, OutputStream out) throws IOException {
-        WriteBit write = new WriteBit(out);
+        BitWriter write = new BitWriter(out);
         int in; 
         while((in = input.getNextCharacter()) != -1) {
             String binaryStr = huffCoding.getCharCode(in);

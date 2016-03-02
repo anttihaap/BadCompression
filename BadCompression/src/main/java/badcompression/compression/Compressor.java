@@ -1,6 +1,8 @@
 package badcompression.compression;
 
-import java.net.URI;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Interface for any compressor.
@@ -8,8 +10,8 @@ import java.net.URI;
  */
 public interface Compressor {
     
-    CompressionResults compress(URI original, URI target);
-    CompressionResults uncompress(URI source, URI target);
+    CompressionResults compress(File original, File target) throws IOException;
+    CompressionResults uncompress(File source, File target) throws FileNotFoundException, IOException;
     
     
 }

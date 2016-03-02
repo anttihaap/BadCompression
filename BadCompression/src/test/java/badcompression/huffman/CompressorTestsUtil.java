@@ -10,7 +10,6 @@ import java.io.File;
 import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import org.junit.After;
@@ -24,9 +23,11 @@ import static org.junit.Assert.*;
  *
  * @author antti
  */
-public class CompressorTests {
+public class CompressorTestsUtil {
     
-    public CompressorTests() {
+    private static final String testFileDir = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+    
+    public CompressorTestsUtil() {
     }
     
     @BeforeClass
@@ -46,10 +47,12 @@ public class CompressorTests {
     }
     
     public static void testUTF8Files(Compressor comp) throws Exception {
-        compressUncompressFromResourceTest(comp,"utf8testfiles/wikipedia_chinese_title:中华人民共和国.txt");
-        compressUncompressFromResourceTest(comp,"utf8testfiles/wikipedia_english_title:Template_talk:Euro_convergence_criteria.txt");
-        compressUncompressFromResourceTest(comp,"utf8testfiles/wikipedia_english_title:Wikipedia_talk:Arbitration_Committee_Elections_December_2013.txt");
-        compressUncompressFromResourceTest(comp,"utf8testfiles/wikipedia_japanese_title:_日本語.txt");
+        File directory = new File(testFileDir + "utf8testfiles/");
+        for (File file  : directory.listFiles()) {
+            if (file.isFile()) {
+                compressUncompressTest(comp, file);
+            }
+        }
     }
 
     public static void filesAreIdentical(URI file1, URI file2) throws Exception {
@@ -61,19 +64,17 @@ public class CompressorTests {
         assertArrayEquals(file1Hash, file2Hash);     
     }
     
-    public static void compressUncompressTest(Compressor comp, String filePath) throws Exception {
+    public static void compressUncompressTest(Compressor comp, File testFile) throws Exception {
         File encodeTo = File.createTempFile("temp", ".txt");
-        File decodeTo = File.createTempFile("temp2", ".txt");
-        URI original = new URI("file://" + filePath);
-        comp.compress(original, encodeTo.toURI());
-        comp.uncompress(encodeTo.toURI(), decodeTo.toURI());
-        System.out.println("encoded and decoded files:");
-        System.out.println(original.getPath() + " - " + decodeTo.getPath());
-        filesAreIdentical(decodeTo.toURI(), original);
+        File decodeTo = File.createTempFile("temp2", ".txt");     
+        comp.compress(testFile, encodeTo);
+        comp.uncompress(encodeTo, decodeTo);
+        System.out.println("\nFILE: " + testFile.toPath());
+        System.out.println("original length: " + testFile.length() + " compressed length: " + encodeTo.length());
+        filesAreIdentical(decodeTo.toURI(), testFile.toURI());
     }
     
-     public static void compressUncompressFromResourceTest(Compressor comp, String filePath) throws Exception {
-        URL sourceFile = Thread.currentThread().getContextClassLoader().getResource(filePath);
-         compressUncompressTest(comp, sourceFile.getPath());
+    public static void compressUncompressTest(Compressor comp, String pathInTestFolder) throws Exception {
+        compressUncompressTest(comp, new File(testFileDir + pathInTestFolder));
     }
 }

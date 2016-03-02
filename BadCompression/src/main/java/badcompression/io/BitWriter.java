@@ -3,20 +3,18 @@ package badcompression.io;
 import java.io.IOException;
 import java.io.OutputStream;
 
-
-
 /**
  * Writes single bits to OutputStream.
  * @author antti
  */
-public class WriteBit {
+public class BitWriter {
     
     private byte buff;
     private int bits_in_buff;
     private OutputStream out;
     private long bytesWriten;
     
-    public WriteBit(OutputStream out) {
+    public BitWriter(OutputStream out) {
         bits_in_buff = 0;
         this.out = out;
         bytesWriten = 0;

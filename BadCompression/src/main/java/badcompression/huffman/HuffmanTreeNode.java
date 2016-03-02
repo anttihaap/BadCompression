@@ -1,10 +1,12 @@
 package badcompression.huffman;
 
+import java.io.Serializable;
+
 /**
  * Represents a single node in a Huffman coding tree.
  * @author antti
  */
-public class HuffmanTreeNode implements Comparable<HuffmanTreeNode>{
+public class HuffmanTreeNode implements Comparable<HuffmanTreeNode>, Serializable{
     
     /**
      * Character.

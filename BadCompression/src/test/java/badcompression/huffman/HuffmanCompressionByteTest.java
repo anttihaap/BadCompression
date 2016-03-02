@@ -38,7 +38,7 @@ public class HuffmanCompressionByteTest {
 
     @Test
     public void testUTF8Files() throws Exception {
-        CompressorTests.testUTF8Files(new HuffmanCompressionByte());
+        CompressorTestsUtil.testUTF8Files(new HuffmanCompressionByte());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class HuffmanCompressionByteTest {
     }
 
     public void compressUncompressTest(String filePath) throws Exception {
-        CompressorTests.compressUncompressFromResourceTest(new HuffmanCompressionByte(), filePath);
+        CompressorTestsUtil.compressUncompressTest(new HuffmanCompressionByte(),filePath);
     }
 
 }
