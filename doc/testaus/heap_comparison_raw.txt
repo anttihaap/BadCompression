@@ -1,0 +1,8 @@
+10^0 java: 0ms - own: 0ms.
+10^1 java: 0ms - own: 0ms.
+10^2 java: 0ms - own: 0ms.
+10^3 java: 0ms - own: 0ms.
+10^4 java: 0ms - own: 0ms.
+10^5 java: 1ms - own: 2ms.
+10^6 java: 50ms - own: 51ms.
+10^7 java: 928ms - own: 1006ms.

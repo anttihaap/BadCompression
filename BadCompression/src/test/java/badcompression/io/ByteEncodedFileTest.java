@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package badcompression.io;
 
 import org.junit.After;
@@ -18,8 +14,8 @@ import static org.junit.Assert.*;
  */
 public class ByteEncodedFileTest {
     
-    private byte[] testBytes = {1,12,-1,12,51,-10,99};
-    private int[] expectedUnsignedBytes = {1,12,255,12,51,246,99};
+    private final byte[] testBytes = {1,12,-1,12,51,-10,99};
+    private final int[] expectedUnsignedBytes = {1,12,255,12,51,246,99};
     
     private ByteEncodedFile encoded;
     

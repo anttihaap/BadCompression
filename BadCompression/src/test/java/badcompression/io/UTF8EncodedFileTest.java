@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package badcompression.io;
 
 import java.io.UnsupportedEncodingException;
@@ -47,9 +42,6 @@ public class UTF8EncodedFileTest {
         UTF8EncodedFile encoded = new UTF8EncodedFile(expected.getBytes("UTF-8"));
         for (int i = 0; i < expected.length(); i++) {
             char c = (char) encoded.getNextCharacter();
-            if ((int) c != (int) expected.charAt(i)) {
-            System.out.println(expected.charAt(i) + " - " + c + " - " + (int) c + " - " + (int) expected.charAt(i));
-            }
             assertArrayEquals((expected.charAt(i) + "").getBytes("UTF-8"), (c + "").getBytes("UTF-8"));
         }
         assertEquals(-1, encoded.getNextCharacter());
@@ -60,7 +52,7 @@ public class UTF8EncodedFileTest {
         
         Random r = new Random();
         for (int i = 0; i < length; i++) {
-            testInput[i] = (char) r.nextInt(Character.MAX_CODE_POINT);
+            testInput[i] = (char) r.nextInt(Character.MAX_CODE_POINT-1);
         }
         return testInput;
     }

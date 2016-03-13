@@ -22,13 +22,13 @@ import static org.junit.Assert.*;
  *
  * @author antti
  */
-public class ReadBitTest {
+public class BitReaderTest {
 
     private InputStream inStream;
-    private ReadBit read;
+    private BitReader read;
     private final String[] testFileExpected = {"01000001", "01010011", "01000100", "00100000", "01001100", "01001111", "01001100", "00001010"};
 
-    public ReadBitTest() {
+    public BitReaderTest() {
 
     }
 
@@ -46,7 +46,7 @@ public class ReadBitTest {
         URL url = Thread.currentThread().getContextClassLoader().getResource("testfile.txt");
         File testFIle = new File(url.getPath());
         inStream = new FileInputStream(testFIle);
-        read = new ReadBit(inStream);
+        read = new BitReader(inStream);
 
     }
 

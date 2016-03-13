@@ -5,6 +5,7 @@
  */
 package badcompression.huffman;
 
+import badcompression.compression.util.StringGenerator;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,58 +22,47 @@ import static org.junit.Assert.*;
  * @author antti
  */
 public class HuffmanCompressionUTF8Test {
-    
+
     public HuffmanCompressionUTF8Test() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
-    
+
     @Test
     public void utf8FileAreIdentical() throws Exception {
         CompressorTestsUtil.testUTF8Files(new HuffmanCompressionUTF8());
     }
-    
-//    @Test
-//    public void randomOutput100Times() throws Exception {
-//        for (int i = 0; i < 1000; i++) {
-//            randomOutput(1000);
-//        }
-//    }
-    
-//    public void randomOutput(int length) throws IOException, Exception {
-//        File rmp = File.createTempFile("temp3aasssssssddddddd", ".txt");
-//        System.out.println("created random to: " + rmp.toPath());
-//        FileOutputStream stream = new FileOutputStream(rmp);
-//        stream.write(randomString(length).getBytes("UTF-8"));
-//        stream.flush();
-//        stream.close();
-//        CompressorTestsUtil.compressUncompressTest(new HuffmanCompressionUTF8(), rmp.getPath());
-//    }
-    
 
-    public static String randomString(int length) {
-      Random r = new Random();
-      StringBuffer sb = new StringBuffer(length);
-      while (sb.length() < length) {
-            char c = (char) r.nextInt(Character.MAX_VALUE);
-            if (Character.isDefined(c)) {
-                  sb.append(c);
-            }
-      }
-      return sb.toString();
-}
+    @Test
+    public void randomOutput100Times() throws Exception {
+        for (int i = 0; i < 1000; i++) {
+            randomOutput(1000);
+        }
+    }
+
+    public void randomOutput(int length) throws IOException, Exception {
+        File rmp = File.createTempFile("temp", ".txt");
+        System.out.println("created random to: " + rmp.toPath());
+        FileOutputStream stream = new FileOutputStream(rmp);
+        stream.write(StringGenerator.randomString(length).getBytes("UTF-8"));
+        stream.flush();
+        stream.close();
+        CompressorTestsUtil.compressUncompressTest(new HuffmanCompressionUTF8(), rmp);
+    }
+
+
 }

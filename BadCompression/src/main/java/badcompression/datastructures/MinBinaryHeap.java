@@ -5,7 +5,7 @@
  */
 package badcompression.datastructures;
 
-import java.util.Arrays;
+import badcompression.compression.util.ArrayCopy;
 
 /**
  * Implementation of MinBinaryHeap using arrays.
@@ -139,7 +139,7 @@ public class MinBinaryHeap<E extends Comparable<E>> {
     }
 
     private void expandArray() {
-        array = Arrays.copyOf(array, array.length * 2);
+        array = ArrayCopy.copyComparableArray(array, array.length * 2);
     }
 
 }

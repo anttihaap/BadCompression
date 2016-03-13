@@ -7,7 +7,7 @@ import java.io.InputStream;
  * Reads single bits from InputStream.
  * @author antti
  */
-public class ReadBit {
+public class BitReader {
     
     private byte buffer;
     private int bits_read;
@@ -18,7 +18,7 @@ public class ReadBit {
      * Creates a new ReadBit object for single bit reading form InputStream
      * @param in InputStream to be read from.
      */
-    public ReadBit(InputStream in) {
+    public BitReader(InputStream in) {
         //so that readBit() reads first byte to buffer
         bits_read = 8;
         this.in = in;

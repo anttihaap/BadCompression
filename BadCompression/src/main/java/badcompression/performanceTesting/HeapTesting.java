@@ -15,9 +15,6 @@ import java.util.Random;
  */
 public class HeapTesting {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         int times = 10;
         
@@ -40,7 +37,7 @@ public class HeapTesting {
         }
     }
     
-    public static long avg(long[] array) {
+    private static long avg(long[] array) {
         long sum = 0;
         for (int i = 0; i < array.length; i++) {
             sum += array[i];
@@ -48,7 +45,7 @@ public class HeapTesting {
         return sum/array.length;
     }
     
-    public static int[] randomArray(int n) {
+    private static int[] randomArray(int n) {
         int[] array = new int[n];
         Random r = new Random();
         for (int i = 0; i < n; i++) {
@@ -59,7 +56,7 @@ public class HeapTesting {
     }
 
     
-    public static long calculateRunTimeJava(int[] array) {
+    private static long calculateRunTimeJava(int[] array) {
         PriorityQueue<Integer> pq_java = new PriorityQueue<>();
         long startTimeMS = System.currentTimeMillis();
         for (int i = 0; i < array.length; i++) {
@@ -72,7 +69,7 @@ public class HeapTesting {
         
     }
     
-    public static long calculateRunTimeOwn(int[] array) {
+    private static long calculateRunTimeOwn(int[] array) {
         MinPriorityQueue<Integer> pq = new MinPriorityQueue<>();
         long startTimeMS = System.currentTimeMillis();
         for (int i = 0; i < array.length; i++) {
@@ -83,6 +80,5 @@ public class HeapTesting {
         }
         return System.currentTimeMillis()-startTimeMS;
     }
-    
-    
+     
 }

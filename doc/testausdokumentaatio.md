@@ -22,7 +22,7 @@ Tiedostot löytyvät sijainnista: <linkki>
 ##### Satunnaisgeneroitu data:
 
 |tiedosto|alkperäinen koko|tavu pakkaus|% alkuperäisestä|
-|---|---|---|
+|---|---|---|---|
 |random1.dat|5242880|5247327|~100%|
 |random2.dat|5242880|5247301|~100%|
 |random3.dat|5242880|5247317|~100%|
@@ -39,43 +39,23 @@ Tiedostot löytyvät sijainnista: <linkki>
 
 Vertailua purun ja pakkauksen ajankäytöstä.
 
-*** TODO: raakadata kaikelle + kuvaajat ***
+Kuvaajien data löytyy kansiosta doc/testaus.
 
 ### HuffmanCompresionByte
 
-#### Pakkaus:
-* 1K bytes in random file - time: 13.0
-* 201K bytes in random file - time: 187.0
-* 501K bytes in random file - time: 460.0
-* 2001K bytes in random file - time: 1842.0
-* 3501K bytes in random file - time: 3202.0
-* 3601K bytes in random file - time: 3319.0
-* 3701K bytes in random file - time: 3382.0
-* 3801K bytes in random file - time: 3503.0
+![](testaus/huffmanbyte_comp_uncomp_times.png)
 
-##### Purku:
+Koodi: badcompression.performanceTesting.CompressionUncompressionTests.java
 
 ### HuffmanCompressionUTF8
+![](testaus/huffmanutf8_comp_uncomp_times.png)
 
-##### Pakkaus:
-
-##### Purku:
+Koodi: badcompression.performanceTesting.CompressionUncompressionTests.java
 
 ## MinPriorityQueue vs. javan PriorityQueue
 
 MinPriorityQueue on toteutettu MinBinaryHeap:lla. Oheisessa taulukosta nähdään miten itsetoteutettu tietorakenne pärjää javan kirjastossa olevaa vastaan. Testit ovat ajettu 10 kertaa per n ja testiajojen keskiarvo näkyy taulukossa.
 
-* 10^0 java: 0ms - own: 0ms.
-* 10^1 java: 0ms - own: 0ms.
-* 10^2 java: 0ms - own: 0ms.
-* 10^3 java: 0ms - own: 0ms.
-* 10^4 java: 0ms - own: 0ms.
-* 10^5 java: 1ms - own: 2ms.
-* 10^6 java: 50ms - own: 51ms.
-* 10^7 java: 928ms - own: 1006ms.
+![](testaus/heap_comparison.png)
 
 Koodi: badcompression.main.Heaptesting.java
-
-## Toteutettavaa:
-
-Raakadataa suorituksista ja kuvaajia.

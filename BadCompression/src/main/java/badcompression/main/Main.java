@@ -10,7 +10,6 @@ import badcompression.compression.Compressor;
 import badcompression.huffman.HuffmanCompressionByte;
 import badcompression.huffman.HuffmanCompressionUTF8;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,38 +21,58 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        args = new String[]{"uncomp", "/home/antti/test.txt.utf8.badComp"};
-        if (args.length < 2 || args.length > 3) {
-            System.out.println("Argument error.");
+        //For testing:
+        //args = new String[]{"uncomp", "/home/antti/comp/test.txt.utf8.badComp"};
+        if (args.length < 2) {
+            System.out.println("Not enough arguments given.");
+            printHelp();
             return;
-        }
+        } else if (args.length > 3) {
+            System.out.println("Too many arguments given.");
+            printHelp();
+            return;
+        } else if (args[0].equals("-help") || args[0].equals("--help")) {
+            printHelp();
+            return;
+        } else if (!args[0].equals("comp") && !args[0].equals("uncomp")) {
+            System.out.println("Command should be comp or uncomp.");
+            printHelp();
+            return;
+        } else if ((args[0].equals("uncomp") && args.length > 2)) {
+            System.out.println("Too many argumens for uncompression.");
+            printHelp();
+            return;
+        } else if ((args[0].equals("comp") && args.length == 3) && !args[1].equals("utf8")) {
+            System.out.println("Option can be utf8.");
+            printHelp();
+            return;
+        }      
 
-        if ((!args[0].equals("comp") && !args[0].equals("uncomp")) || (args[0].equals("uncomp") && args.length > 2)) {
-            System.out.println("Argument error.");
-            return;
-        }
         String jarPath = Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 
         String command = args[0];
         String sourceFilePath;
+        String destFilePath = null;
         boolean utf8 = false;
         if (args.length == 3) {
             sourceFilePath = args[2];
+            destFilePath = sourceFilePath + ".utf8.badComp";
             utf8 = true;
             if (!args[1].equals("utf8")) {
                 System.out.println("Argument error: 2nd argument should be UTF8 or empty.");
             }
         } else {
             sourceFilePath = args[1];
+            destFilePath = sourceFilePath + ".badComp";
         }
 
         if (command.equals("comp")) {
             //UTF8
             if (utf8) {
                 System.out.println(args[2]);
-                compress(new HuffmanCompressionUTF8(), args[2], args[2] + ".utf8.badComp");
+                compress(new HuffmanCompressionUTF8(), sourceFilePath, destFilePath);
             } else {
-                compress(new HuffmanCompressionByte(), args[1], args[1] + ".badComp");
+                compress(new HuffmanCompressionByte(), sourceFilePath, destFilePath);
             }
         } else {
             String[] splitted = args[1].split("\\.");
@@ -61,25 +80,18 @@ public class Main {
                 //TODO: check first.
                 System.out.println("File not compressed with BadCompression.");
             } else if (splitted[splitted.length - 2].equals("utf8")) {
-                System.out.println("UTF8");
                 String target = splitted[0];
                 for (int i = 1; i < splitted.length - 2; i++) {
                     target += "." + splitted[i];
                 }
-                System.out.println("target: " + target);
                 uncompress(new HuffmanCompressionUTF8(), args[1], target);
-                System.out.println("target: " + target);
             } else {
                 String target = splitted[0];
                 for (int i = 1; i < splitted.length - 1; i++) {
                     target += "." + splitted[i];
                 }
                 uncompress(new HuffmanCompressionByte(), args[1], target);
-                System.out.println("target: " + target);
-                System.out.println("normal");
-
             }
-
         }
     }
 
@@ -105,11 +117,6 @@ public class Main {
         File sourceFile = new File(source);
         File targetFile = new File(target);
         checkFiles(targetFile, sourceFile);
-        if (targetFile.exists()) {
-            System.out.println("FILURE:");
-            System.out.println("File " + target + " already exists.");
-            return;
-        }
         CompressionResults results = null;
         try {
             results = comp.uncompress(sourceFile, targetFile);
@@ -151,11 +158,21 @@ public class Main {
     }
 
     private static void printHelp() {
-        System.out.println("Usage: ");
-        System.out.println("java -jar BadCompression.jar <command> <option for utf8 compression> <file to compress/uncompress>");
+        System.out.println("");
+        System.out.println("USAGE:");
+        System.out.println("java -jar BadCompression.jar <command> <optional option> <file");
         System.out.println("<command>: comp (compress) or uncomp (uncompress)");
-        System.out.println("<option for utf compression>: if excists compress file using utf-8");
-        System.out.println("TODO^");
+        System.out.println("<optional option>: utf8 for utf8 file compression.");
+        System.out.println("<absolute file path> (example: /home/user/file.txt)");
+        System.out.println("");
+        System.out.println("EXAMPLES:");
+        System.out.println("Compress utf-8 file:");
+        System.out.println("java -jar BadCompression.jar comp utf8 /home/user/utf8file.txt");
+        System.out.println("Compress any file:");
+        System.out.println("java -jar BadComp.jar comp /home/user/file.txt");
+        System.out.println("Uncompress file:");
+        System.out.println("java -jar BadComp.jar uncomp /home/user/file.txt.utf8.badComp");
+        System.out.println("java -jar BadComp.jar uncomp /home/user/file.txt.badComp");
     }
 
 }

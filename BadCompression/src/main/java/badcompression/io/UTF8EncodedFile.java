@@ -27,7 +27,7 @@ public class UTF8EncodedFile implements EncodedFile {
         this.file = file;
         UTF8encoded = new String(this.file, "UTF-8");
         counter = 0;
-        freq = new long[Character.MAX_VALUE];
+        freq = new long[Character.MAX_VALUE+1];
         calculateFreq();
     }
     

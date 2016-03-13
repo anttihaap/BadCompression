@@ -30,11 +30,13 @@
                         <param>badcompression.huffman.*</param>
                         <param>badcompression.io.*</param>
                         <param>badcompression.datastructures.*</param>
+                        <param>badcompression.util.*</param>
                     </targetClasses>
                     <targetTests>
                         <param>badcompression.huffman.*</param>
                         <param>badcompression.io.*</param>
                         <param>badcompression.datastructures.*</param>
+                        <param>badcompression.util.*</param>
                     </targetTests>
                 </configuration>
             </plugin>

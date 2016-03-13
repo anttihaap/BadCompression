@@ -5,7 +5,7 @@
  */
 package badcompression.huffman;
 
-import badcompression.io.ReadBit;
+import badcompression.io.BitReader;
 import badcompression.io.BitWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +27,7 @@ public class HuffmanCompression {
      */
     public static void decode(HuffmanTreeNode huffTree, InputStream in, OutputStream out) throws IOException {
         HuffmanTreeNode curr = huffTree;
-        ReadBit r = new ReadBit(in);
+        BitReader r = new BitReader(in);
         while (true) {
             int bitValue = r.readBit();
             if (bitValue == -1) {
