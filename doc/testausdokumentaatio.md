@@ -29,12 +29,6 @@ Tiedostot löytyvät sijainnista: <linkki>
 
 Tiedostot löytyvät sijainnista: <linkki>
 
-##### Satunnaisgeneroitu UTF-8 (TODO):
-
-### Mahdollisia testejä toteutettavaksi:
-
-* tiedostojen kokojen verailu ja ajankäyttö
-
 ## Pakkauksen ja purun ajankäyttö:
 
 Vertailua purun ja pakkauksen ajankäytöstä.
