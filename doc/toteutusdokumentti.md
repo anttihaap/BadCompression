@@ -2,7 +2,7 @@
 
 ## HuffmanCoding
 
-### HuffmanCoding - luokka
+#### HuffmanCoding
 
 Tarkempi kuvaus Huffmanin koodauksesta määrittelydokumentissa.
 
@@ -16,6 +16,57 @@ Toteutuksessa käytetään **prioriteettijonoa**, joka taas käyttää **kekoa**
   * täytetään pioriteettijonoon esiintymätiheydet. **O(n log n)**
   * haetaan 2 pienintä alkiosta prioriteettijonosta, kunnes prioriteettijonossa on vain yksi jäljellä,yhdistetään ne jonoon uudeksi solmuksi. Hakuja on n kappaletta. PriorityQueue:hin lisäys/poisto O(log n). **O(n log n)**
   * luodaan String[] taulukko, johon lisätään jokaisen merkin kohdalle oma koodaus. Etsiminen tapahtuu käymällä koko puu läpi. **O(n)**
+
+#### HuffmanCompressorByte
+
+Tavuja tunnistava Huffmanin koodaukseen perustuva pakkaaja ja purkaja. Luokka toteuttaa rajanpinnan Compressor.
+
+###### compress()
+
+* Luetaan tiedosto. (Tähän käytetään EncodedFile -luokkaa)
+
+* Luodaan Huffmanin koodaus luetusta esiintymätiheyksien (getFreq()) avulla.
+
+* Kirjoitetaan frekvenssi tiedostoon.
+
+* Koodataan pakattava tiedosto purkutiedostoon uudestaan käyttäen Huffmanin koodausta.
+
+###### uncompress()
+
+* Luetaan frekvenssit tiedoston alussa (FrequencyIO avulla).
+
+* Luodaan Huffmanin koodaus frekvensseistä.
+
+* Dekoodataan tiedosto käyttäen Huffmanin koodausta.
+
+
+### HuffmanCompressorUTF8
+
+UTF-8 merkkejä tunnistavaan Huffmanin koodauksen perustuva pakkaaja ja purkaja.
+
+Luokka toimii samalla periaatteella kuin tavuja tunnistava, mutta lukee ja kirjoittaa vain UTF-8 syötettä.
+
+## IO
+
+### BitReader
+Lukee yksittäisiä bittejä tiedostosta.
+
+### BitWriter
+Kirjoittaa yksittäisiä bittejä tiedostoon.
+
+### EncodedFile
+Rajapinta yksittäisten merkkien lukemiseen tiedostosta peräkkäin.
+
+Toteuttavat luokat:
+
+* ByteEncodedFile - Palauttaa yksittäisiä tavuja.
+* UTF8EncodedFile - Palauttaa yksittäisiä UTF-8 merkkejä.
+
+### FrequencyIO
+Merkkien esiintymätiheyden lukija ja kirjoittaja.
+
+### UTF8Writer
+Kirjoittaa UTF8-merkkejä tiedostoon.
 
 ## Tietorakenteet
 
@@ -41,5 +92,3 @@ Operaatiot:
 * *Lisääminen:* Lisätään uusi alkio käytetyn taulukon loppuun. Verrataan uuden solmun vanhempaa, jos vanhempi on suurempi, vaihdetaan alkioiden paikkoja. Tehdään sama solmun vanhemmalle, kunnes vanhempi on pienempi. Ohjelmassa kyseinen vertailu on toteutettu rekursiivisesti.
 
 * *Poistaminen:*  Tallennetaan taulukon alkio taulukon ensimmäisestä indeksistä muuttujaan. Vaihdetaan taulukon viimeinen alkio ensimmäiseksi ja vähennetään suurinta käytettyä indeksiä yhdellä. Vertaillaan alkion lapsia. Jos lapsista jompi kumpi on suurempi kuin nykyinen solmu vaihdetaan pienimmän ja nykyisen solmun alkiot keskenään. Tehdään sama vertailu pienimmän lapsen solmun kohdalla. Jatketaan rekursiivisesti kunnes solmulla ei ole lapsia tai lapset ovat suurempia kuin nykyinen solmu. Lopuksi palautetaan alussa tallennettu muuttuja, eli keon pienin alkio.
-
-** [TODO: kuvia] **
